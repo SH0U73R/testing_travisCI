@@ -10,8 +10,7 @@ class Potter
       end      
   end
 
-
-
+  
   private
 
   #Calculates the price for a single book bougth (One or more copies of the same book)
@@ -23,32 +22,6 @@ class Potter
       end
     end
     return result = value * 8
-  end
-
-  #
-  def count_collection(books)
-    x = 0
-    book_count = Array.new
-    book_count = books.values
-      book_count.each do |i|
-        if i.to_i > 0
-           x += 1
-        end          
-      end
-
-    if x > 1
-      #What values have each book collection
-      full_collection(book_count)
-    else      
-      single_collection(book_count)
-    end
-
-    #if x > 1
-    #  result = 8 * x * 0.95#Here i need to find a way to catch the disscount      
-    #else
-    #  return book_count[0] * 8
-    #end
-
   end
 
   def full_collection(count)
@@ -69,7 +42,25 @@ class Potter
     when 5
       value = 8 * value * 0.75
     end
+  end
 
+  #
+  def count_collection(books)
+    x = 0
+    book_count = Array.new
+    book_count = books.values
+      book_count.each do |i|
+        if i.to_i > 0
+           x += 1
+        end          
+      end
+
+    if x > 1
+      #What values have each book collection
+      full_collection(book_count)
+    else      
+      single_collection(book_count)
+    end
   end
 
 end 
