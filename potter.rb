@@ -1,5 +1,12 @@
 class Potter
 
+  BOOK_PRICE = 8
+  #Percentages
+  PERC_1 = 0.95
+  PERC_2 = 0.90
+  PERC_3 = 0.80
+  PERC_4 = 0.75
+
   #Main invocation for returning the price
   def price(books)
     #Checks for an empty collection
@@ -10,58 +17,36 @@ class Potter
       end      
   end
 
-  
-  private
 
-  #Calculates the price for a single book bougth (One or more copies of the same book)
-  def single_collection(book_count)
-    value = 0
-    book_count.each do |x|
-      if x > 0
-        value = x
-      end
+  private
+  def count_collection(books)
+    cart = Array.new   
+      books.each{|k, v| cart.push(v) if v > 0}
+
+    if cart.length > 1
+      #puts "This are the values of cart #{cart}"
+      full_collection(cart)
+    else      
+      return cart.max * BOOK_PRICE
     end
-    return result = value * 8
   end
 
   def full_collection(count)
-    value = 0
-    count.each do |x|
-      if x > 0
-        value += x
-      end
-    end
-    
-    case value
-    when 2
-      value = 8 * value * 0.95
-    when 3
-      value = 8 * value * 0.90
-    when 4
-      value = 8 * value * 0.80
-    when 5
-      value = 8 * value * 0.75
-    end
-  end
-
-  #
-  def count_collection(books)
-    x = 0
-    book_count = Array.new
-    book_count = books.values
-      book_count.each do |i|
-        if i.to_i > 0
-           x += 1
-        end          
-      end
-
-    if x > 1
-      #What values have each book collection
-      full_collection(book_count)
-    else      
-      single_collection(book_count)
-    end
+    value = count.length
+    #{b1: 2, b2: 1, b3: 0, b4: 0, b5: 0}
+    #Actual procedure value = 8 * value * 0.95 
+    #Neede procedure value = 8 + (8 * value * 0.95)
+     case value
+     when 2
+       value = BOOK_PRICE * value * PERC_1
+     when 3
+       value = BOOK_PRICE * value * PERC_2
+     when 4
+       value = BOOK_PRICE * value * PERC_3
+     when 5
+       value = BOOK_PRICE * value * PERC_4
+     end
   end
 
 end 
-#p.price({b1: 1, b2:0, b3: 0, b4: 0, b5: 1})
+#p.price({b1: 2, b2: 1, b3: 0, b4: 0, b5: 0})
