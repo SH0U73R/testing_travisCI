@@ -20,25 +20,28 @@ class Potter
 
   private
   def count_collection(books)
+    #Refactor using books.reduce :+
     cart = Array.new   
       books.each{|k, v| cart.push(v) if v > 0}
 
-    if cart.length > 1
-      #puts "This are the values of cart #{cart}"
+    if cart.length > 1    
       full_collection(cart)
     else      
       return cart.max * BOOK_PRICE
     end
   end
 
-  def full_collection(count)
+  
+end 
+
+#count will take the original value
+#new_set will take only number ones
+
+def full_collection(count)
     value = count.length
-    #{b1: 2, b2: 1, b3: 0, b4: 0, b5: 0}
-    #Actual procedure value = 8 * value * 0.95 
-    #Neede procedure value = 8 + (8 * value * 0.95)
      case value
      when 2
-       value = BOOK_PRICE * value * PERC_1
+       value = BOOK_PRICE * value * PERC_1   
      when 3
        value = BOOK_PRICE * value * PERC_2
      when 4
@@ -48,5 +51,31 @@ class Potter
      end
   end
 
-end 
-#p.price({b1: 2, b2: 1, b3: 0, b4: 0, b5: 0})
+
+count = [2, 1]
+
+def disscount(count)  
+newset = [1, 1]
+sum = 0
+c = Array.new 
+  count.each do |i|
+    #Saves the length of the value for disscount calculation
+    #iteration = count.value
+
+    #Saves the sumatory of disscount
+    sum += 8 * count.length * 0.95 if count.length > 1
+    
+    #Reduces by one on the array and re asign the new values for count
+    count = count.zip(newset).map { |x, y| x - y }
+  
+    c = count
+    c.delete(0)
+  
+    count = c
+    sum += 8 if count.length == 1
+    puts sum
+    #Deletes the zeroes
+    #count.delete(0)
+    #p.delete(0)
+  end
+end

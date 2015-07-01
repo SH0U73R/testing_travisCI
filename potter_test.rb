@@ -27,10 +27,10 @@ class Test_Potter < Minitest::Test
   end
 
   def test_several_discounts
-    #assert_equal(8 + (8 * 2 * 0.95), @potter.price({b1: 2, b2: 1, b3: 0, b4: 0, b5: 0}))
-    #assert_equal(2 * (8 * 2 * 0.95), @potter.price({b1: 2, b2: 2, b3: 0, b4: 0, b5: 0}))
-    #assert_equal((8 * 4 * 0.8) + (8 * 2 * 0.95), @potter.price({b1: 2, b2: 1, b3: 2, b4: 1, b5: 0}))
-    #assert_equal(8 + (8 * 5 * 0.75), @potter.price({b1: 0, b2: 2, b3: 1, b4: 1, b5: 1}))
+    #assert_equal(8 + (8 * 2 * 0.95), @potter.price({b1: 2, b2: 1, b3: 0, b4: 0, b5: 0})) #23.2
+    #assert_equal(2 * (8 * 2 * 0.95), @potter.price({b1: 2, b2: 2, b3: 0, b4: 0, b5: 0})) #30.4
+    #assert_equal((8 * 4 * 0.8) + (8 * 2 * 0.95), @potter.price({b1: 2, b2: 1, b3: 2, b4: 1, b5: 0})) #40.8
+    #assert_equal(8 + (8 * 5 * 0.75), @potter.price({b1: 0, b2: 2, b3: 1, b4: 1, b5: 1})) #38
   end
 
   def testEdgeCases
