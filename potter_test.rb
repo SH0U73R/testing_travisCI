@@ -27,16 +27,26 @@ class Test_Potter < Minitest::Test
   end
 
   def test_several_discounts
-    #assert_equal(8 + (8 * 2 * 0.95), @potter.price({b1: 2, b2: 1, b3: 0, b4: 0, b5: 0})) #23.2
-    #assert_equal(2 * (8 * 2 * 0.95), @potter.price({b1: 2, b2: 2, b3: 0, b4: 0, b5: 0})) #30.4
-    #assert_equal((8 * 4 * 0.8) + (8 * 2 * 0.95), @potter.price({b1: 2, b2: 1, b3: 2, b4: 1, b5: 0})) #40.8
-    #assert_equal(8 + (8 * 5 * 0.75), @potter.price({b1: 0, b2: 2, b3: 1, b4: 1, b5: 1})) #38
+    assert_equal(8 + (8 * 2 * 0.95), @potter.price({b1: 2, b2: 1, b3: 0, b4: 0, b5: 0})) #23.2
+    assert_equal(2 * (8 * 2 * 0.95), @potter.price({b1: 2, b2: 2, b3: 0, b4: 0, b5: 0})) #30.4
+    assert_equal((8 * 4 * 0.8) + (8 * 2 * 0.95), @potter.price({b1: 2, b2: 1, b3: 2, b4: 1, b5: 0})) #40.8
+    assert_equal(8 + (8 * 5 * 0.75), @potter.price({b1: 1, b2: 2, b3: 1, b4: 1, b5: 1})) #38
   end
 
-  def testEdgeCases
-    #assert_equal(2 * (8 * 4 * 0.8), price([0, 0, 1, 1, 2, 2, 3, 4]))
-    #assert_equal(3 * (8 * 5 * 0.75) + 2 * (8 * 4 * 0.8),
-    #price([0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4]))
+  def test_edge_cases
+    assert_equal(2 * (8 * 4 * 0.8), @potter.price({b1: 2, b2: 2, b3: 2, b4: 1, b5: 1}))
+    assert_equal(3 * (8 * 5 * 0.75) + 2 * (8 * 4 * 0.8),
+    @potter.price({b1: 5, b2: 5, b3: 4, b4: 5, b5: 4}))
   end
 
 end
+
+#First iteration
+b1: 2, b2: 2, b3: 2, b4: 1, b5: 1
+ colection = 5
+ disscount = 8 * 5 * 0.75 = 30.0
+
+ #First iteration
+b1: 1, b2: 1, b3: 1, b4: 0, b5: 0
+colection = 3
+disscount = 8 * 3 * 0.90 = 21.6

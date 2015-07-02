@@ -24,19 +24,46 @@ class Potter
     cart = Array.new   
       books.each{|k, v| cart.push(v) if v > 0}
 
-    if cart.length > 1    
-      full_collection(cart)
+    if cart.length > 1
+      disscount(cart)
     else      
       return cart.max * BOOK_PRICE
     end
   end
 
+  def disscount(count)  
+  sum = 0
+  c = Array.new 
+    count.each do |i|
+      newset = Array.new(count.length)
+      newset = newset.map { |p| 1 }
+      #Saves the length of the value for disscount calculation
+      iteration = count.length
+      case iteration
+       when 1
+        sum += BOOK_PRICE        
+       when 2
+         sum += BOOK_PRICE * iteration * 0.95
+       when 3
+         sum += BOOK_PRICE * iteration * 0.90
+       when 4
+         sum += BOOK_PRICE * iteration * 0.80
+       when 5
+         sum += BOOK_PRICE * iteration * 0.75
+       end      
+      #Reduces by one on the array and re asign the new values for count
+      count = count.zip(newset).map { |x, y| x - y }  
+      c = count
+      c.delete(0)  
+      count = c      
+    end
+    return sum
+  end
   
-end 
 
-#count will take the original value
-#new_set will take only number ones
+end
 
+=begin
 def full_collection(count)
     value = count.length
      case value
@@ -52,30 +79,18 @@ def full_collection(count)
   end
 
 
-count = [2, 1]
+def test_method(count)
+  count.each do |i|    
+    iteration = count.length
 
-def disscount(count)  
-newset = [1, 1]
-sum = 0
-c = Array.new 
-  count.each do |i|
-    #Saves the length of the value for disscount calculation
-    #iteration = count.value
+    puts "The value of count is: #{count}"
+    puts "The value of newset is : #{newset}"
 
-    #Saves the sumatory of disscount
-    sum += 8 * count.length * 0.95 if count.length > 1
-    
-    #Reduces by one on the array and re asign the new values for count
     count = count.zip(newset).map { |x, y| x - y }
-  
     c = count
     c.delete(0)
-  
     count = c
-    sum += 8 if count.length == 1
-    puts sum
-    #Deletes the zeroes
-    #count.delete(0)
-    #p.delete(0)
+    puts "The result of the substraction is #{count}"
   end
 end
+=end
