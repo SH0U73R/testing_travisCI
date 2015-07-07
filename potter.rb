@@ -1,5 +1,6 @@
 class Potter
 
+#Constants
   BOOK_PRICE = 8
   #Percentages
   PERC_1 = 0.95
@@ -31,66 +32,48 @@ class Potter
     end
   end
 
-  def disscount(count)  
-  sum = 0
-  c = Array.new 
-    count.each do |i|
-      newset = Array.new(count.length)
-      newset = newset.map { |p| 1 }
-      #Saves the length of the value for disscount calculation
-      iteration = count.length
-      case iteration
-       when 1
-        sum += BOOK_PRICE        
-       when 2
-         sum += BOOK_PRICE * iteration * 0.95
-       when 3
-         sum += BOOK_PRICE * iteration * 0.90
-       when 4
-         sum += BOOK_PRICE * iteration * 0.80
-       when 5
-         sum += BOOK_PRICE * iteration * 0.75
-       end      
-      #Reduces by one on the array and re asign the new values for count
-      count = count.zip(newset).map { |x, y| x - y }  
-      c = count
-      c.delete(0)  
-      count = c      
+  def best_disscount(count)
+    #First, take out the full quantity if books (We already know that they are different books)
+    max_set = count.inject {|sum, x| sum + x}
+    #Then find out if we can make some even distribution
+    if max_set.even?
+      newset = Array.new(4)
+      newset = newset.map { |p| 2 }
+    else
+      #puts "Not even :D"
     end
+    return newset
+  end
+
+  def disscount(count)
+    sum = 0    
+    c = Array.new 
+      count.each do |i|
+        newset = Array.new(count.length)
+        newset = newset.map { |p| 1 }
+        #Saves the length of the value for disscount calculation
+        iteration = count.length
+        case iteration
+         when 1
+          sum += BOOK_PRICE        
+         when 2
+           sum += BOOK_PRICE * iteration * 0.95
+         when 3
+           sum += BOOK_PRICE * iteration * 0.90
+         when 4
+           sum += BOOK_PRICE * iteration * 0.80
+         when 5
+           sum += BOOK_PRICE * iteration * 0.75
+         end      
+        #Reduces by one on the array and re asign the new values for count
+        count = count.zip(newset).map { |x, y| x - y }  
+        c = count
+        c.delete(0)  
+        count = c      
+    end    
     return sum
   end
   
 
 end
 
-=begin
-def full_collection(count)
-    value = count.length
-     case value
-     when 2
-       value = BOOK_PRICE * value * PERC_1   
-     when 3
-       value = BOOK_PRICE * value * PERC_2
-     when 4
-       value = BOOK_PRICE * value * PERC_3
-     when 5
-       value = BOOK_PRICE * value * PERC_4
-     end
-  end
-
-
-def test_method(count)
-  count.each do |i|    
-    iteration = count.length
-
-    puts "The value of count is: #{count}"
-    puts "The value of newset is : #{newset}"
-
-    count = count.zip(newset).map { |x, y| x - y }
-    c = count
-    c.delete(0)
-    count = c
-    puts "The result of the substraction is #{count}"
-  end
-end
-=end
