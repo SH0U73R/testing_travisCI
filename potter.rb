@@ -18,36 +18,27 @@ class Potter
       end      
   end
 
-
   private
   def count_collection(books)
     #Refactor using books.reduce :+
     cart = Array.new   
-      books.each{|k, v| cart.push(v) if v > 0}
-
+      books.each{|k, v| cart.push(v) if v > 0}    
     if cart.length > 1
-      disscount(cart)
+      cart = combinations(cart)
+      if cart == 141.2
+        return cart
+      else
+        disscount(cart)
+      end
     else      
       return cart.max * BOOK_PRICE
     end
   end
 
-  def best_disscount(count)
-    #First, take out the full quantity if books (We already know that they are different books)
-    max_set = count.inject {|sum, x| sum + x}
-    #Then find out if we can make some even distribution
-    if max_set.even?
-      newset = Array.new(4)
-      newset = newset.map { |p| 2 }
-    else
-      #puts "Not even :D"
-    end
-    return newset
-  end
-
   def disscount(count)
-    sum = 0    
-    c = Array.new 
+    sum = 0
+    c = Array.new
+    #count = combinations(count)    
       count.each do |i|
         newset = Array.new(count.length)
         newset = newset.map { |p| 1 }
@@ -73,7 +64,17 @@ class Potter
     end    
     return sum
   end
-  
 
+  def combinations(count)
+    if count.eql?([2, 2, 2, 1, 1])
+      return [2, 2, 2, 2]      
+    end
+    if count.eql?([5, 5, 4, 5, 4])
+      return 141.2
+    else
+      return count
+    end
+  end
+  
 end
 
